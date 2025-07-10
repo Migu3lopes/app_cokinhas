@@ -1,14 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import sqlite3
 import os
-import json  # ✅ Adiciona aqui
+import json
 from flask import send_from_directory
 from werkzeug.utils import secure_filename
 
-
-
 app = Flask(__name__)
-app.secret_key = 'bL#f32v@9Xz!82aJkR^5'  # podes escolher outra string segura
+app.secret_key = 'bL#f32v@9Xz!82aJkR^5'
 
 # Função para verificar se o utilizador existe na base de dados
 def verificar_credenciais(username, password):
@@ -33,7 +31,7 @@ def login():
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template('dashboard.html')
+    return "Bem-vindo ao dashboard!"
 
 @app.route('/equipas')
 def equipas():
