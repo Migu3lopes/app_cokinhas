@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Registo de Assiduidade - Petizes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+img.logo {
+    width: 140px;         /* ou outro valor, ex: 120px, 100px */
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffffff;
+            padding: 30px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .mensagem {
+            text-align: center;
+            font-weight: bold;
+            animation: piscar 1s infinite;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+        .sucesso {
+            color: green;
+            background-color: #e6ffed;
+        }
+        .erro {
+            color: red;
+            background-color: #ffe6e6;
+        }
+        @keyframes piscar {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+        form {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+        }
+        th:first-child, td:first-child {
+            text-align: left;
+        }
+        .botao-opcao {
+            padding: 10px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            background-color: #ccc;
+            color: white;
+        }
+        .presente.ativo { background-color: green; }
+        .justificada.ativo { background-color: goldenrod; }
+        .injustificada.ativo { background-color: red; }
+        #registarBtn {
+            display: none;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        #registarBtn:hover {
+            background-color: #0056b3;
+          }
+        .voltar, .ver-historico {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+        .voltar {
+            background-color: orange;
+            color: black;
+        }
+        .voltar:hover {
+            background-color: darkorange;
+        }
+        .ver-historico {
+            background-color: #0000FF;
+            color: yellow;
+            margin-left: 10px;
+        }
+        .ver-historico:hover {
+            background-color: #0000FF;
+        }
+.ver-calendario {
+    background-color: #0000FF;
+    color: yellow;
+    padding: 10px 20px;
+    margin-left: 10px;
+    text-decoration: none;
+    border-radius: 6px;
+}
+.ver-calendario:hover {
+    background-color: #0066cc;
+}
+    </style>
+</head>
+<body>
+<div style="text-align: center;">
+ <img class="logo" src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube">
+    <h1>Registo de Assiduidade - Petizes</h1>
+
+    {% if mensagem %}
+        <p class="mensagem {% if 'sucesso' in mensagem %}sucesso{% else %}erro{% endif %}">{{ mensagem }}</p>
+    {% endif %}
+
+    <form method="POST" id="formAssiduidade">
+        <label for="data">Data do Treino:</label>
+        <input type="date" name="data" id="data" required>
+
+        <table>
+            <tr>
+                <th>Nome do Jogador</th>
+                <th>Presente</th>
+                <th>Falta Justificada</th>
+                <th>Falta Injustificada</th>
+            </tr>
+            {% for jogador in jogadores %}
+            <tr>
+                <td>{{ jogador[1] }}</td>
+                <input type="hidden" name="estado_{{ jogador[0] }}" id="estado_{{ jogador[0] }}">
+                <td>
+                    <button type="button" class="botao-opcao presente" onclick="selecionarOpcao('{{ jogador[0] }}', 'Presente', this)">✔</button>
+                </td>
+                <td>
+                    <button type="button" class="botao-opcao justificada" onclick="selecionarOpcao('{{ jogador[0] }}', 'Falta Justificada', this)">✔</button>
+                </td>
+                <td>
+                    <button type="button" class="botao-opcao injustificada" onclick="selecionarOpcao('{{ jogador[0] }}', 'Falta Injustificada', this)">✔</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <button type="submit" id="registarBtn">Registar Assiduidade</button>
+    </form>
+  <a href="/petizes" class="voltar">&#8592; Voltar ao Menu da Equipa</a>
+    <a href="/petizes/historico" class="ver-historico">📊 Ver Histórico</a>
+<a href="/petizes/calendario" class="ver-calendario">📅 Ver Calendário</a>
+
+
+
+    <script>
+        function selecionarOpcao(jogadorId, estado, botao) {
+            document.getElementById('estado_' + jogadorId).value = estado;
+
+            const linha = botao.parentNode.parentNode;
+            const botoes = linha.querySelectorAll('.botao-opcao');
+            botoes.forEach(btn => btn.classList.remove('ativo'));
+
+            botao.classList.add('ativo');
+            verificarPreenchimento();
+        }
+
+        function verificarPreenchimento() {
+            const dataSelecionada = document.getElementById('data').value;
+            const estados = document.querySelectorAll("input[type='hidden'][id^='estado_']");
+            const todosPreenchidos = Array.from(estados).every(input => input.value !== "");
+
+            const botao = document.getElementById('registarBtn');
+            if (dataSelecionada && todosPreenchidos) {
+                botao.style.display = 'inline-block';
+            } else {
+                botao.style.display = 'none';
+            }
+        }
+
+        document.getElementById('data').addEventListener('change', verificarPreenchimento);
+    </script>
+</body>
+</html>
+

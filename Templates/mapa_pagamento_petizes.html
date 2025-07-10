@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Mapa de Pagamentos - Petizes</title>
+    <style>
+#logo-clube {
+    display: block;
+    margin: 20px auto;
+    max-width: 120px;
+    height: auto;
+}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 95%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #0000FF;
+            color: yellow;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .total-global {
+            margin-top: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .btn-voltar {
+            display: inline-block;
+            margin-top: 30px;
+            background-color: orange;
+            color: black;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
+    <h2>Mapa de Pagamentos - Petizes</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome do Atleta</th>
+                {% for categoria in categorias %}
+                    <th>{{ categoria }}</th>
+                {% endfor %}
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for nome, dados in resumo.items() %}
+                <tr>
+                    <td>{{ nome }}</td>
+                    {% for categoria in categorias %}
+                        <td>{{ '%.2f'|format(dados[categoria]) }} €</td>
+                    {% endfor %}
+                    <td><strong>{{ '%.2f'|format(dados['Total']) }} €</strong></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="total-global">
+        Total Recebido pela Equipa: {{ '%.2f'|format(total_geral) }} €
+    </div>
+
+    <a href="{{ url_for('gestao_financeira_petizes') }}" class="btn-voltar">← Voltar à Gestão Financeira</a>
+
+</body>
+</html>
+

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de Despesas</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 6px;
+            text-align: center;
+        }
+        th {
+            background-color: #0000FF;
+            color: white;
+        }
+        .total {
+            text-align: right;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        @media print {
+            .no-print {
+                display: none;
+            }
+        }
+        .no-print {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .no-print a {
+            text-decoration: none;
+            color: white;
+            background-color: #1E90FF;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body onload="window.print()">
+    <div class="no-print">
+        <a href="/tabela_despesas">🔙 Voltar à Tabela</a>
+    </div>
+
+    <h1>Relatório de Despesas</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Item</th>
+                <th>Valor</th>
+                <th>Comentário</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set total = namespace(soma=0) %}
+            {% for despesa in despesas %}
+            <tr>
+                <td>{{ despesa.data }}</td>
+                <td>{{ despesa.item }}</td>
+                <td>€{{ '%.2f' % despesa.valor }}</td>
+                <td>{{ despesa.comentario }}</td>
+            </tr>
+            {% set total.soma = total.soma + despesa.valor %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="total">Total Geral: €{{ '%.2f' % total.soma }}</div>
+</body>
+</html>
+

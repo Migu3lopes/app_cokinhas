@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Recibo de Pagamento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 60px;
+            color: #000;
+        }
+
+        #topo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #logo {
+            max-width: 120px;
+        }
+
+        .direita {
+            text-align: right;
+            font-size: 18px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 40px;
+            text-transform: uppercase;
+        }
+
+        .tabela {
+            width: 100%;
+            margin-top: 40px;
+            border-collapse: collapse;
+        }
+
+        .tabela td {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .tabela tr.total {
+            font-weight: bold;
+        }
+
+        .info-iva {
+            margin-top: 40px;
+            font-style: italic;
+        }
+
+        @media print {
+            button {
+                display: none;
+            }
+        }
+
+        button {
+            margin-top: 40px;
+            padding: 10px 20px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+    </style>
+</head>
+<body>
+    <div id="topo">
+        <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo" id="logo">
+        <div class="direita">
+            <p>Exmo.(a) Sr.(a)</p>
+            <p><strong>{{ nome }}</strong></p>
+        </div>
+    </div>
+
+    <h2>Recibo de Pagamento</h2>
+
+    <table class="tabela">
+        <tr>
+            <td><strong>Data de Emissão:</strong></td>
+            <td>{{ data_emissao }}</td>
+        </tr>
+        <tr>
+            <td><strong>Data do Pagamento:</strong></td>
+            <td>{{ data_pagamento }}</td>
+        </tr>
+        <tr>
+            <td><strong>Descrição do Pagamento:</strong></td>
+            <td>{{ descricao }}</td>
+        </tr>
+        <tr>
+            <td><strong>Valor:</strong></td>
+            <td>{{ valor }} €</td>
+        </tr>
+        <tr>
+            <td><strong>Desconto:</strong></td>
+            <td>0,00 €</td>
+        </tr>
+        <tr>
+            <td><strong>IVA:</strong></td>
+            <td>0,00 €</td>
+        </tr>
+        <tr class="total">
+            <td><strong>Total:</strong></td>
+            <td>{{ valor }} €</td>
+        </tr>
+    </table>
+
+    <p class="info-iva">Razão de isenção de IVA: Não sujeito, não tributado (ou similar).</p>
+
+    <button onclick="window.print()">Imprimir Recibo</button>
+</body>
+</html>

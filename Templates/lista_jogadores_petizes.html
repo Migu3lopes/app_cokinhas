@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Jogadores - Petizes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f6f6f6;
+            margin: 20px;
+        }
+
+        #logo-clube {
+            display: block;
+            margin: 0 auto 20px auto;
+            max-width: 120px;
+            height: auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #0000FF;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .btn-imprimir, .btn-voltar {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 10px 0;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-imprimir {
+            background-color: #0000FF;
+            color: white;
+        }
+
+        .btn-voltar {
+            background-color: orange;
+            color: black;
+        }
+
+        .acoes {
+            text-align: center;
+        }
+
+        /* Estilos de impressão */
+@media print {
+    .btn-imprimir,
+    .btn-voltar,
+    .acoes,
+    nav,
+    footer,
+    h1,
+    h2 {
+        display: none !important;
+    }
+
+    .contacto,
+    .encarregado {
+        display: none !important;
+    }
+
+    body {
+        margin: 20px;
+        font-family: Arial, sans-serif;
+        font-size: 12pt;
+        color: #000;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    thead {
+        background-color: #007bff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    th {
+        color: white !important;
+        background-color: #007bff !important;
+        border: 1px solid black !important;
+        padding: 8px;
+        text-align: left;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    td {
+        border: 1px solid black !important;
+        padding: 8px;
+        color: black;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2 !important;
+    }
+}
+</style>
+</head>
+<body>
+    <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
+
+    <h2>Lista de Jogadores - Petizes</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome Completo</th>
+<th>Data de Nascimento</th>
+<th class="encarregado">Encarregado de Educação</th>
+<th class="contacto">Contacto</th>
+<th>Escola</th>
+<th class="acoes">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for jogador in jogadores %}
+            <tr>
+                <td>{{ jogador[1] }}</td>
+<td>{{ jogador[2] }}</td>
+<td class="encarregado">{{ jogador[3] }}</td>
+<td class="contacto">{{ jogador[4] }}</td>
+<td>{{ jogador[5] }}</td>
+<td class="acoes">
+    <a href="{{ url_for('editar_jogador_petizes', id=jogador[0]) }}">✏️</a>
+    <a href="{{ url_for('apagar_jogador_petizes', id=jogador[0]) }}" onclick="return confirm('Tem a certeza que deseja apagar este jogador?');">🗑️</a>
+</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button onclick="window.print()" class="btn-imprimir">🖨️ Imprimir Plantel</button>
+    <a href="{{ url_for('plantel_petizes') }}" class="btn-voltar">← Voltar ao Menu</a>
+
+
+</body>
+</html>
+

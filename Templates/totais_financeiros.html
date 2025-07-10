@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Totais Financeiros</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            padding: 30px;
+            text-align: center;
+        }
+
+        #logo-clube {
+            display: block;
+            margin: 20px auto;
+            max-width: 120px;
+        }
+
+        h1 {
+            margin-bottom: 40px;
+        }
+
+        .painel {
+            background-color: white;
+            display: inline-block;
+            padding: 40px 60px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            text-align: left;
+            max-width: 400px;
+            margin-top: 30px;
+        }
+
+        .linha {
+            font-size: 18px;
+            margin: 15px 0;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+
+        .linha span:first-child {
+            font-weight: bold;
+        }
+
+        .saldo {
+            font-size: 20px;
+            margin-top: 25px;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .saldo.negativo {
+            color: #dc3545;
+        }
+
+        .botoes {
+            margin-top: 40px;
+        }
+
+        .botoes a {
+            padding: 12px 25px;
+            background-color: #1E90FF;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            margin: 10px;
+        }
+
+        .botoes a:hover {
+            background-color: #0066cc;
+        }
+
+        .voltar {
+            background-color: #888 !important;
+        }
+
+        .voltar:hover {
+            background-color: #666 !important;
+        }
+    </style>
+</head>
+<body>
+
+<img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
+<h1>Totais Financeiros</h1>
+
+<div class="painel">
+    <div class="linha">
+        <span>Total de Receitas:</span>
+        <span>€{{ '%.2f' % total_receitas }}</span>
+    </div>
+    <div class="linha">
+        <span>Total de Despesas:</span>
+        <span>€{{ '%.2f' % total_despesas }}</span>
+    </div>
+    <div class="saldo {{ 'negativo' if saldo < 0 else '' }}">
+        Saldo Atual: €{{ '%.2f' % saldo }}
+    </div>
+</div>
+
+<div class="botoes">
+    <a href="/tabela_receitas">📊 Ver Receitas</a>
+    <a href="/tabela_despesas">📉 Ver Despesas</a>
+    <a href="/administracao/financeiro" class="voltar">🔙 Voltar</a>
+</div>
+
+</body>
+</html>

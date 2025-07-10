@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Evento / Jogo</title>
+    <style>
+img.logo {
+    width: 140px;         /* ou outro valor, ex: 120px, 100px */
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #aaa;
+        }
+
+        h2 {
+            text-align: center;
+            color: #003366;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .botoes {
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .botoes a, .botoes button {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            color: yellow;
+            background-color: #0000FF;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .botoes a:hover, .botoes button:hover {
+            background-color: #0066cc;
+        }
+
+        .mensagem-sucesso {
+            margin-top: 20px;
+            text-align: center;
+            color: green;
+            font-weight: bold;
+            animation: piscar 1s infinite alternate;
+        }
+
+        @keyframes piscar {
+            from { opacity: 1; }
+            to { opacity: 0.4; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" class="logo" style="display: block; margin: 0 auto;">
+    <h2>Criar Evento / Jogo</h2>
+
+    {% if sucesso %}
+        <div class="mensagem-sucesso">Evento criado com sucesso!</div>
+    {% endif %}
+
+    <form method="POST">
+        <label for="competicao">Competição *</label>
+        <input type="text" id="competicao" name="competicao" required>
+        
+<label for="competicao">Jogo*</label>
+        <input type="text" id="jogo" name="jogo" required>
+
+        <label for="jornada">Jornada (opcional)</label>
+        <input type="text" id="jornada" name="jornada">
+
+        <label for="data">Dia *</label>
+        <input type="date" id="data" name="data" required>
+
+        <label for="hora">Hora *</label>
+        <input type="time" id="hora" name="hora" required>
+
+        <label for="local">Local *</label>
+        <input type="text" id="local" name="local" required>
+
+        <label for="local">Hora e Local de concentração *</label>
+        <input type="text" id="local" name="local" required>
+
+        <div class="botoes">
+            <button type="submit">Criar Jogo</button>
+            <a href="{{ url_for('lista_eventos_petizes') }}">Lista de Jogos</a>
+            <a href="{{ url_for('planeamento_petizes') }}">Voltar ao Planeamento</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

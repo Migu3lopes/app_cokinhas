@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Inserir Receita</title>
+    <style>
+        #logo-clube {
+            display: block;
+            margin: 20px auto;
+            max-width: 120px;
+            height: auto;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        form {
+            background-color: white;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        select, input[type="date"], input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn-centro {
+            text-align: center;
+        }
+
+        .btn-centro button {
+            margin-top: 30px;
+            padding: 12px 160px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-centro button:hover {
+            background-color: #218838;
+        }
+
+        .botoes {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .botoes a {
+            margin: 10px;
+            padding: 12px 25px;
+            background-color: #1E90FF;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+
+        .botoes a.voltar {
+            background-color: #888;
+        }
+
+        .botoes a.voltar:hover {
+            background-color: #666;
+        }
+
+        .botoes a:hover {
+            background-color: #0066cc;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
+    <h1>Gestão de Receitas</h1>
+
+    <form action="/receitas/guardar" method="POST">
+        <label for="item">Item:</label>
+        <select name="item" required>
+            <option value="">-- Selecione --</option>
+            <option value="Patrocínios">Patrocínios</option>
+            <option value="Atividades">Atividades</option>
+            <option value="Outras Receitas">Outras Receitas</option>
+        </select>
+
+        <label for="data">Data:</label>
+        <input type="date" name="data" required>
+
+        <label for="valor">Valor (€):</label>
+        <input type="text" name="valor" id="valor" placeholder="Ex: 45.00" required>
+
+        <label for="comentario">Comentário:</label>
+        <textarea name="comentario" rows="4" placeholder="Descrição da receita..."></textarea>
+
+        <div class="btn-centro">
+            <button type="submit">💾 Guardar Receita</button>
+        </div>
+    </form>
+
+    <div class="botoes">
+        <a class="voltar" href="/administracao/financeiro">🔙 Voltar à Gestão de Movimentos Financeiros</a>
+        <a href="/tabela_receitas">📊 Ver Tabela de Receitas</a>
+    </div>
+</div>
+
+<script>
+    document.getElementById('valor').addEventListener('blur', function () {
+        let raw = this.value.replace(/[^\d,\.]/g, '').replace(',', '.');
+        let num = parseFloat(raw);
+        if (!isNaN(num)) {
+            this.value = '€' + num.toFixed(2).replace('.', ',');
+        }
+    });
+</script>
+
+</body>
+</html>

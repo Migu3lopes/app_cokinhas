@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de Documentos em Falta</title>
+    <style>
+        #logo-clube {
+            display: block;
+            margin: 20px auto;
+            max-width: 120px;
+            height: auto;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        select, button {
+            padding: 8px 12px;
+            margin: 0 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #388e3c;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #0000FF;
+            color: white;
+        }
+
+        .falta {
+            color: red;
+            font-weight: bold;
+        }
+
+        .presente {
+            color: green;
+        }
+
+        .voltar {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #888;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .voltar:hover {
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
+
+    <h1>Relatório de Documentos em Falta</h1>
+
+    <form method="GET" action="/relatorio/documentos_em_falta">
+        <label for="equipa">Filtrar por equipa:</label>
+        <select name="equipa" id="equipa">
+            <option value="">-- Todas --</option>
+            <option value="Petizes" {% if equipa_selecionada == 'Petizes' %}selected{% endif %}>Petizes</option>
+            <option value="Traquinas" {% if equipa_selecionada == 'Traquinas' %}selected{% endif %}>Traquinas</option>
+            <option value="Benjamins" {% if equipa_selecionada == 'Benjamins' %}selected{% endif %}>Benjamins</option>
+            <option value="Infantis" {% if equipa_selecionada == 'Infantis' %}selected{% endif %}>Infantis</option>
+        </select>
+        <button type="submit">Filtrar</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome do Atleta</th>
+                <th>Equipa</th>
+                <th>Fotografia</th>
+                <th>Mod. 2 FPF</th>
+                <th>Exame Médico</th>
+                <th>CC Atleta</th>
+                <th>CC EE</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for atleta in atletas %}
+        <tr>
+            <td>{{ atleta.nome }}</td>
+            <td>{{ atleta.equipa }}</td>
+            <td class="{{ 'falta' if not atleta.fotografia else 'presente' }}">{{ '❌' if not atleta.fotografia else '✔️' }}</td>
+            <td class="{{ 'falta' if not atleta.mod2_fpf else 'presente' }}">{{ '❌' if not atleta.mod2_fpf else '✔️' }}</td>
+            <td class="{{ 'falta' if not atleta.exame_medico else 'presente' }}">{{ '❌' if not atleta.exame_medico else '✔️' }}</td>
+            <td class="{{ 'falta' if not atleta.cc_atleta else 'presente' }}">{{ '❌' if not atleta.cc_atleta else '✔️' }}</td>
+            <td class="{{ 'falta' if not atleta.cc_ee else 'presente' }}">{{ '❌' if not atleta.cc_ee else '✔️' }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div style="text-align: center;">
+        <a class="voltar" href="/administracao/documentos">🔙 Voltar à Gestão de Documentos</a>
+    </div>
+</div>
+</body>
+</html>

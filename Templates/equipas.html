@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Equipas do Clube</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+#logo-clube {
+    display: block;
+    margin: 20px auto;
+    max-width: 120px;
+    height: auto;
+}
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            color: #333;
+            text-align: center;
+        }
+
+        .container {
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .botao {
+            display: inline-block;
+            margin: 12px;
+            padding: 15px 30px;
+            background-color: #0000FF; /* azul */
+            color: #ffeb3b; /* amarelo */
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 8px;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
+        }
+
+        .botao:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .voltar {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 10px 25px;
+            background-color: orange;
+            color: black;
+            text-decoration: none;
+            font-size: 16px;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px rgba(255, 165, 0, 0.3);
+        }
+
+        .voltar:hover {
+            background-color: darkorange;
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
+        <h1>Selecione uma Equipa</h1>
+
+        <a class="botao" href="/petizes">Petizes</a>
+        <a class="botao" href="#">Traquinas</a>
+        <a class="botao" href="#">Benjamins</a>
+        <a class="botao" href="#">Infantis</a>
+      
+
+        <br>
+
+        <a class="voltar" href="/dashboard">← Voltar</a>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Plantel - Petizes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+img.logo {
+    width: 140px;         /* ou outro valor, ex: 120px, 100px */
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .botoes {
+            text-align: center;
+        }
+
+        .botao {
+            padding: 10px 20px;
+            background-color: #29a745;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .botao:hover {
+            background-color: #218838;
+        }
+
+        .voltar {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: orange;
+            color: black;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .voltar:hover {
+            background-color: darkorange;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <div style="text-align: center;">
+        <img class="logo" src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube">
+        <h1>Criar Novo Jogador</h1>
+{% if mensagem %}
+    <p style="color: green; font-weight: bold;">{{ mensagem }}</p>
+{% endif %}
+        <form method="POST" action="">
+            <label for="nome">Nome Completo:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="data_nascimento">Data de Nascimento:</label>
+            <input type="date" id="data_nascimento" name="data_nascimento" required>
+
+            <label for="encarregado">Nome do Encarregado de Educação:</label>
+            <input type="text" id="encarregado" name="encarregado" required>
+
+            <label for="contacto">Contacto do Encarregado:</label>
+            <input type="text" id="contacto" name="contacto" required>
+
+            <label for="escola">Escola:</label>
+<select id="escola" name="escola" required>
+    <option value="">-- Selecionar escola --</option>
+    <option>Escola Primária José Pinheiro Gonçalves</option>
+    <option>Escola Básica de Estrada</option>
+    <option>Escola Secundária de Monção</option>
+    <option>Jardim de Infância de Cortes</option>
+    <option>Colégio do Minho</option>
+    <option>Escola EB 2/3 de Pias</option>
+    <option>Escola EB 2/3 de Tangil</option>
+    <option>Escola EB 2/3 Deu-la-Deu Martins</option>
+    <option>Eprami</option>
+    <option>Santa Casa Misericórdia de Monção</option>
+</select>
+
+            <div class="botoes">
+                <button type="submit" class="botao">Adicionar Jogador</button>
+            </div>
+        </form>
+
+        <div class="botoes">
+            <a class="voltar" href="/petizes/plantel">← Voltar</a>
+        </div>
+    </div>
+</body>
+</html>

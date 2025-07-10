@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Histórico de Assiduidade - Petizes</title>
+    <style>
+#logo-clube {
+    display: block;
+    margin: 20px auto;
+    max-width: 120px;
+    height: auto;
+}
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 30px;
+        }
+        table {
+            margin: auto;
+            width: 90%;
+            border-collapse: collapse;
+            background-color: white;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #0000FF;
+            color: yellow;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .btn-voltar {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: orange;
+            color: black;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
+    <h1>Histórico de Assiduidade - Petizes</h1>
+
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Presenças</th>
+            <th>Faltas Justificadas</th>
+            <th>Faltas Injustificadas</th>
+            <th>Percentagem de Assiduidade</th>
+        </tr>
+        {% for jogador in historico %}
+        <tr>
+            <td>{{ jogador.nome }}</td>
+            <td>{{ jogador.presencas }}</td>
+            <td>{{ jogador.justificadas }}</td>
+            <td>{{ jogador.injustificadas }}</td>
+            <td>{{ jogador.percentagem }}%</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="/petizes" class="btn-voltar">← Voltar ao Menu da Equipa</a>
+
+</body>
+</html>

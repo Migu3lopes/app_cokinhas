@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Imprimir Convocatória</title>
+    <style>
+#logo-clube {
+    display: block;
+    margin: 20px auto;
+    max-width: 120px;  /* Reduz a largura máxima */
+    height: auto;      /* Mantém a proporção */
+}
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .info {
+            margin-bottom: 20px;
+        }
+
+        .info strong {
+            display: inline-block;
+            width: 180px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+
+        th, td {
+            border: 1px solid #999;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .assinatura {
+            margin-top: 50px;
+        }
+
+        .assinatura p {
+            margin-bottom: 60px;
+        }
+
+        @media print {
+            button {
+                display: none;
+            }
+        }
+
+        .botao-imprimir {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-weight: bold;
+            font-size: 16px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+<img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
+    <h1>Convocatória - Petizes</h1>
+
+    <div class="info">
+        <p><strong>Competição:</strong> {{ evento[0] }}</p>
+        <p><strong>Jornada:</strong> {{ evento[1] or '—' }}</p>
+        <p><strong>Data:</strong> {{ evento[2] }}</p>
+        <p><strong>Hora:</strong> {{ evento[3] }}</p>
+        <p><strong>Local:</strong> {{ evento[4] }}</p>
+        <p><strong>Hora e Local de Concentração:</strong> {{ evento[5] }}</p>
+    </div>
+
+    <h3>Jogadores</h3>
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Status</th>
+            <th>Assinatura</th>
+        </tr>
+        {% for jogador, estado in jogadores %}
+        <tr>
+            <td>{{ jogador }}</td>
+            <td style="color: {% if estado == 'Convocado' %}green{% else %}red{% endif %}; font-weight: bold;">
+                {{ estado }}
+            </td>
+            <td></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="assinatura">
+        <p><strong>O Treinador:</strong></p>
+        <p>_________________________________________</p>
+    </div>
+
+   
+
+    <script>
+        window.onload = function() {
+            window.print();
+        };
+    </script>
+
+</body>
+</html>

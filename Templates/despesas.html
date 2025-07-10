@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestão de Despesas</title>
+    <style>
+#logo-clube {
+    display: block;
+    margin: 20px auto;
+    max-width: 120px;
+    height: auto;
+}
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+        }
+        form {
+            margin: 20px auto;
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        select, input[type="text"], input[type="date"], textarea, button {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+        button {
+            background-color: #1E90FF;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0066cc;
+        }
+        .voltar, .ver-tabela {
+            display: inline-block;
+            margin: 15px 10px 0;
+            padding: 12px 25px;
+            background-color: #888;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .voltar:hover, .ver-tabela:hover {
+            background-color: #666;
+        }
+    </style>
+    <script>
+        function formatarParaEuro(input) {
+            let valor = parseFloat(input.value.replace(",", "."));
+            if (!isNaN(valor)) {
+                input.value = "€" + valor.toFixed(2);
+            }
+        }
+
+        function validarFormulario(event) {
+            const campo = document.querySelector('input[name="valor"]');
+            let valor = campo.value.replace("€", "").replace(",", ".");
+            if (isNaN(parseFloat(valor))) {
+                alert("Por favor, insira um valor numérico válido.");
+                event.preventDefault();
+            }
+        }
+
+        window.addEventListener("DOMContentLoaded", () => {
+            document.querySelector("form").addEventListener("submit", validarFormulario);
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
+    <h1>Gestão de Despesas</h1>
+
+    <form action="/despesas/guardar" method="POST">
+        <label for="item">Item:</label>
+        <select name="item" required>
+            {% for item in ['Aquisição de material desportivo', 'Equipamentos', 'Aquisição de bens alimentares', 'Pagamento de Torneios', 'Pagamentos Treinadores', 'Exames médicos', 'Pagamento de Seguros', 'Pagamento de combustível', 'Outros pagamentos'] %}
+            <option value="{{ item }}">{{ item }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="data">Data:</label>
+        <input type="date" name="data" required>
+
+        <label for="valor">Valor:</label>
+        <input type="text" name="valor" placeholder="0.00" onblur="formatarParaEuro(this)" required>
+
+        <label for="comentario">Comentário:</label>
+        <textarea name="comentario" placeholder="Comentário..." rows="3"></textarea>
+
+        <button type="submit">Guardar Despesa</button>
+    </form>
+
+    <a class="voltar" href="/administracao/financeiro">🔙 Voltar à Gestão de Movimentos Financeiros</a>
+    <a class="ver-tabela" href="/tabela_despesas">📋 Ver Tabela de Despesas</a>
+</body>
+</html>
+

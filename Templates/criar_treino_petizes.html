@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Sessão de Treino</title>
+    <style>
+        img.logo {
+            width: 140px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background-color: #f7f9fc;
+            color: #333;
+        }
+
+        h1 {
+            color: #000000;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-container {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 700px;
+            margin: 0 auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 15px;
+            display: block;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="time"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .botoes-acao {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .botoes-acao a,
+        .botoes-acao button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            min-width: 180px;
+            text-align: center;
+        }
+
+        .btn-criar {
+            background-color: #0000FF;
+            color: yellow;
+        }
+
+        .botao-lista-sessoes {
+            background-color: #0000FF;
+            color: yellow;
+        }
+
+        .btn-voltar {
+            background-color: orange;
+            color: black;
+        }
+
+        .mensagem-sucesso {
+            color: green;
+            font-weight: bold;
+            animation: piscar 1s infinite;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        @keyframes piscar {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" class="logo" style="display: block; margin: 0 auto;">
+        <h1>Criar Sessão de Treino</h1>
+
+        {% if mensagem %}
+            <p class="mensagem-sucesso">{{ mensagem }}</p>
+        {% endif %}
+
+        <form method="POST">
+            <label for="numero">Número do Treino:</label>
+            <input type="text" name="numero" required>
+
+            <label for="data">Data do Treino:</label>
+            <input type="date" name="data" required>
+
+            <label for="hora">Hora do Treino:</label>
+            <input type="time" name="hora" required>
+
+            <label for="local">Local do treino:</label>
+            <textarea name="local" rows="1" required></textarea>
+
+            <label for="objetivos">Objetivos do Treino:</label>
+            <textarea name="objetivos" rows="4" required></textarea>
+
+            <label for="material">Material a utilizar:</label>
+            <textarea name="material" rows="4" required></textarea>
+
+            <label for="aquecimento">Aquecimento:</label>
+            <textarea name="aquecimento" rows="4" required></textarea>
+
+            <label for="parte_fundamental">Parte Fundamental:</label>
+            <textarea name="parte_fundamental" rows="6" required></textarea>
+
+            <label for="retorno_calma">Retorno à Calma:</label>
+            <textarea name="retorno_calma" rows="4" required></textarea>
+
+            <div class="botoes-acao">
+                <button type="submit" class="btn-criar">Criar Sessão de Treino</button>
+                <a href="{{ url_for('lista_treinos_petizes') }}" class="botao-lista-sessoes">Lista de Sessões</a>
+                <a href="{{ url_for('planeamento_petizes') }}" class="btn-voltar">← Voltar ao Planeamento</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

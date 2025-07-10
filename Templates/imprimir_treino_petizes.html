@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Sessão de Treino {{ treino[0] }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            color: #000;
+        }
+
+        .logo {
+            width: 120px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #003366;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .titulo {
+            background-color: #004080;
+            color: white;
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .secao {
+            margin-bottom: 20px;
+        }
+
+        .campo {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            white-space: pre-line;
+        }
+
+        .botao-imprimir {
+            display: inline-block;
+            background-color: darkgreen;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .botao-imprimir:hover {
+            background-color: green;
+        }
+
+        .secao-exercicio {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .texto-exercicio {
+            width: 60%;
+        }
+
+        .campo-exercicio {
+            width: 35%;
+            text-align: right;
+        }
+
+        .campo-img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+        }
+
+        @media print {
+            .botao-imprimir {
+                display: none;
+            }
+
+            body {
+                margin: 10mm;
+                font-size: 12pt;
+            }
+
+            .titulo {
+                background-color: #003366 !important;
+                -webkit-print-color-adjust: exact;
+            }
+
+            .campo {
+                border: 1px solid #000;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo" class="logo">
+    <h1>Sessão de Treino {{ treino[0] }}</h1>
+
+    <div class="secao">
+        <div class="titulo">Data e Hora</div>
+        <div class="campo">{{ treino[1] }} às {{ treino[2] }}</div>
+    </div>
+
+    <div class="secao">
+        <div class="titulo">Local</div>
+        <div class="campo">{{ treino[3] }}</div>
+    </div>
+
+    <div class="secao">
+        <div class="titulo">Objetivos do Treino</div>
+        <div class="campo">{{ treino[4] }}</div>
+    </div>
+
+    <div class="secao">
+        <div class="titulo">Material a Utilizar</div>
+        <div class="campo">{{ treino[5] }}</div>
+    </div>
+
+    <div class="titulo">Aquecimento</div>
+    <div class="secao-exercicio">
+        <div class="texto-exercicio">
+            <div class="campo">{{ aquecimento_texto }}</div>
+        </div>
+        <div class="campo-exercicio">
+            <img src="{{ url_for('static', filename='img/campo_futebol.png') }}" alt="Campo de Futebol" class="campo-img">
+        </div>
+    </div>
+
+    <div class="titulo">Parte Fundamental</div>
+    <div class="secao-exercicio">
+        <div class="texto-exercicio">
+            <div class="campo">{{ parte_fundamental_texto }}</div>
+        </div>
+        <div class="campo-exercicio">
+            <img src="{{ url_for('static', filename='img/campo_futebol.png') }}" alt="Campo de Futebol" class="campo-img">
+        </div>
+    </div>
+
+    <div class="titulo">Retorno à Calma</div>
+    <div class="secao-exercicio">
+        <div class="texto-exercicio">
+            <div class="campo">{{ retorno_calma_texto }}</div>
+        </div>
+        <div class="campo-exercicio">
+            <img src="{{ url_for('static', filename='img/campo_futebol.png') }}" alt="Campo de Futebol" class="campo-img">
+        </div>
+    </div>
+
+    <a href="#" onclick="window.print()" class="botao-imprimir">🖨️ Imprimir Sessão</a>
+
+</body>
+</html>
+
+

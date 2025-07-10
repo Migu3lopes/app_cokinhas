@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel do Clube</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        #logo-clube {
+            display: block;
+            margin: 20px auto;
+            max-width: 120px;
+            height: auto;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+            color: #333;
+            text-align: center;
+        }
+
+        .container {
+            padding: 40px 20px;
+        }
+
+        img.logo {
+            width: 160px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 8px;
+            font-weight: 10;
+            margin-bottom: 10px;
+        }
+
+        .botao {
+            display: inline-block;
+            margin: 12px;
+            padding: 15px 35px;
+            background-color: #0000FF;
+            color: yellow;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
+            transition: 0.3s ease;
+        }
+
+        .botao:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .sair {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .sair:hover {
+            background-color: #b02a37;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
+    <h1>Bem-vindo à Área Interna da Academia</h1>
+
+    <!-- Todos os botões com a mesma classe -->
+    <a class="botao" href="/equipas">Equipas</a>
+    <a class="botao" href="/administracao">Administração</a>
+    <a class="botao sair" href="/logout">Sair</a>
+
+    <h2>copyright @oscokinhas 2025/2026</h2>
+</div>
+</body>
+</html>

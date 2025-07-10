@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Convocatória - Petizes</title>
+    <style>
+#logo-clube {
+    display: block;
+    margin: 20px auto;
+    max-width: 120px;  /* Reduz a largura máxima */
+    height: auto;      /* Mantém a proporção */
+}
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f2f2f2;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        .jogador {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .botoes-selecao button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .convocado {
+            background-color: green;
+            color: white;
+        }
+        .nao-convocado {
+            background-color: red;
+            color: white;
+        }
+        .acoes {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .acoes button, .acoes a {
+            margin: 10px;
+            padding: 10px 15px;
+            background-color: #0000FF;
+            color: yellow;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+<img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
+    <h2>Convocatória {{ Jogo_id }}</h2>
+    <form method="post">
+        {% for jogador in jogadores %}
+        <div class="jogador">
+            <span>{{ jogador[1] }}</span>
+            <div class="botoes-selecao">
+                <label>
+                    <input type="radio" name="convocado_{{ jogador[0] }}" value="Sim" required>
+                    <span class="convocado">Convocado</span>
+                </label>
+                <label>
+                    <input type="radio" name="convocado_{{ jogador[0] }}" value="Nao">
+                    <span class="nao-convocado">Não Convocado</span>
+                </label>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="acoes">
+            <button type="submit">Guardar Convocatória</button>
+<a href="{{ url_for('imprimir_convocatoria_petizes', evento_id=evento_id) }}">Imprimir Convocatória</a>
+
+            <a href="{{ url_for('lista_eventos_petizes') }}">Voltar ao Planeamento</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

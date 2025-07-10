@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Planeamento - Petizes</title>
+    <style>
+img.logo {
+    width: 140px;         /* ou outro valor, ex: 120px, 100px */
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            text-align: center;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #000000;
+            margin-bottom: 40px;
+        }
+
+.botao-planeamento {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px;
+    transition: background-color 0.3s ease;
+}
+        .botao-criar-treino {
+            background-color: #0000FF;
+            color: yellow;
+        }
+
+        .botao-criar-evento {
+            background-color: #0000FF;
+            color: yellow;
+        }
+
+
+      .botao-voltar {
+    background-color: orange;
+    color: black;
+    text-align: center;
+    margin-top: 40px;
+    display: block;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+}
+        .botao:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+        <img class="logo" src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube">
+    <h1>Planeamento da Equipa de Petizes</h1>
+<a href="{{ url_for('criar_treino_petizes') }}" class="botao-planeamento botao-criar-treino">Criar Treino</a>
+<a href="{{ url_for('criar_evento_petizes') }}" class="botao-planeamento botao-criar-evento">Criar Jogo</a>
+
+
+   <a href="{{ url_for('petizes') }}" class="botao-voltar">← Voltar ao Menu da Equipa</a>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Teste de Calendário</title>
+
+  <!-- Caminho local (fora do Flask) -->
+<link href="static/fullcalendar/main.min.css" rel="stylesheet">
+<script src="static/fullcalendar/main.min.js"></script>
+<script src="static/fullcalendar/locales-all.min.js"></script>
+
+
+  <style>
+    #calendar {
+      max-width: 900px;
+      margin: 40px auto;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align:center">Calendário de Teste</h2>
+  <div id="calendar"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        locale: 'pt',
+        initialView: 'dayGridMonth',
+        events: [
+          { title: 'Treino', start: '2025-06-01' },
+          { title: 'Jogo', start: '2025-06-04' }
+        ]
+      });
+      calendar.render();
+    });
+  </script>
+</body>
+</html>
