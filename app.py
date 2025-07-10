@@ -1281,10 +1281,13 @@ def totais_financeiros():
                            total_despesas=total_despesas,
                            saldo=saldo)
 
+if __name__ != '__main__':
+    import logging
+    logging.basicConfig(level=logging.INFO)
+    # Isto é necessário para o gunicorn reconhecer
 
-if __name__ == '__main__':
-    # Garante que o ficheiro 'users.db' existe
-    if not os.path.exists('users.db'):
-        print("A base de dados users.db não foi encontrada.")
-    else:
-        app.run(debug=True)
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "A plataforma está online com sucesso!"
