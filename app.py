@@ -1,13 +1,34 @@
+from flask import Flask, render_template, request, redirect, url_for, flash
+import sqlite3
 import os
-from flask import Flask, render_template
+import json  # ✅ Adiciona aqui
+from flask import send_from_directory
+from werkzeug.utils import secure_filename
 
-# Caminho absoluto para garantir que o Flask encontra a pasta
-template_dir = os.path.abspath('templates')
-app = Flask(__name__, template_folder=template_dir)
 
-@app.route('/')
+
+app = Flask(__name__)
+app.secret_key = 'bL#f32v@9Xz!82aJkR^5'  # podes escolher outra string segura
+
+# Função para verificar se o utilizador existe na base de dados
+def verificar_credenciais(username, password):
+    conn = sqlite3.connect('users.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, password))
+    user = c.fetchone()
+    conn.close()
+    return user
+
+@app.route('/', methods=['GET', 'POST'])
 def login():
     error = None
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if verificar_credenciais(username, password):
+            return redirect(url_for('dashboard'))
+        else:
+            error = 'Credenciais inválidas. Tente novamente.'
     return render_template('login.html', error=error)
 
 @app.route('/dashboard')
