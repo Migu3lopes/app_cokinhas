@@ -1,76 +1,17 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <title>Login - Clube</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- RESPONSIVO -->
+{% extends 'base.html' %}
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+{% block title %}Login{% endblock %}
 
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            padding: 20px;
-        }
-
-        .login-container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px gray;
-            max-width: 90%;
-            width: 360px;
-            margin: auto;
-        }
-
-        img {
-            width: 100%;
-            max-width: 200px;
-            margin-bottom: 20px;
-        }
-
-        input {
-            display: block;
-            margin: 10px auto;
-            padding: 10px;
-            width: 100%;
-            max-width: 280px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        .error {
-            color: red;
-            margin-top: 10px;
-        }
-    </style>
-</head>
-<body>
-    <div class="login-container">
-        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo do Clube">
-        <form method="POST">
-            <input type="text" name="username" placeholder="Utilizador" required>
-            <input type="password" name="password" placeholder="Senha" required>
-            <button type="submit">Entrar</button>
-        </form>
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
+{% block content %}
+<div class="card p-4 shadow mx-auto" style="max-width: 400px;">
+    <img src="{{ url_for('static', filename='img/logo.png') }}" class="img-fluid mb-3" alt="Logo do Clube">
+    <form method="POST">
+        <input type="text" name="username" placeholder="Utilizador" class="form-control mb-2" required>
+        <input type="password" name="password" placeholder="Senha" class="form-control mb-2" required>
+        <button type="submit" class="btn btn-success w-100">Entrar</button>
+    </form>
+    {% if error %}
+        <div class="text-danger text-center mt-2">{{ error }}</div>
+    {% endif %}
+</div>
+{% endblock %}
