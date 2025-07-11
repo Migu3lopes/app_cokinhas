@@ -1,106 +1,94 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <title>Calendário de Assiduidade - Petizes</title>
-    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
-    <style>
-#logo-clube {
-    display: block;
-    margin: 20px auto;
-    max-width: 120px;
-    height: auto;
-}
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            background-color: #f6f6f6;
-        }
+{% extends 'base.html' %}
+{% block title %}Calendário de Assiduidade - Petizes{% endblock %}
 
-        h2 {
-            text-align: center;
-            color: #333;
-        }
+{% block content %}
+<style>
+    #logo-clube {
+        display: block;
+        margin: 20px auto;
+        max-width: 120px;
+        height: auto;
+    }
 
-        img.logo {
-            width: 140px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        }
+    h2 {
+        text-align: center;
+        color: #333;
+    }
 
-        .btn-voltar {
-            display: inline-block;
-            padding: 10px 15px;
-            margin: 20px 0;
-            font-weight: bold;
-            border: none;
-            border-radius: 5px;
-            background-color: orange;
-            color: black;
-            text-decoration: none;
-        }
+    .btn-voltar {
+        display: inline-block;
+        padding: 10px 15px;
+        margin: 20px 0;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        background-color: orange;
+        color: black;
+        text-decoration: none;
+    }
 
-        #calendario {
-            max-width: 900px;
-            margin: auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #ccc;
-        }
-    </style>
-</head>
-<body>
+    #calendario {
+        max-width: 900px;
+        margin: auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #ccc;
+    }
+</style>
+
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+
 <div class="container">
     <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
-        <h2>Agenda - Petizes</h2>
-    </div>
+    <h2>Agenda - Petizes</h2>
+</div>
 
-    <div id="calendario"></div>
+<div id="calendario"></div>
 
+<div style="text-align: center;">
     <a href="{{ url_for('assiduidade_petizes') }}" class="btn-voltar">← Voltar ao Registo Assiduidade</a>
+</div>
 
-    <!-- FullCalendar -->
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var calendarEl = document.getElementById('calendario');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                locale: 'pt',
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,listMonth'
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendario');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'pt',
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,listMonth'
+            },
+            eventSources: [
+                {
+                    url: '/petizes/assiduidade-json',
+                    color: 'green',
+                    textColor: 'white'
                 },
-                eventSources: [
-    {
-        url: '/petizes/assiduidade-json',
-        color: 'green',
-        textColor: 'white'
-    },
-    {
-        url: '/petizes/treinos-json',
-        color: 'blue',
-        textColor: 'white'
-    },
-    {
-        url: '/petizes/eventos-json',
-        color: 'red',
-        textColor: 'white'
-    }
-],
-                eventClick: function(info) {
-                    if (info.event.url) {
-                        window.location.href = info.event.url;
-                        info.jsEvent.preventDefault();
-                    }
+                {
+                    url: '/petizes/treinos-json',
+                    color: 'blue',
+                    textColor: 'white'
+                },
+                {
+                    url: '/petizes/eventos-json',
+                    color: 'red',
+                    textColor: 'white'
                 }
-            });
-            calendar.render();
+            ],
+            eventClick: function(info) {
+                if (info.event.url) {
+                    window.location.href = info.event.url;
+                    info.jsEvent.preventDefault();
+                }
+            }
         });
-    </script>
-</body>
-</html>
+        calendar.render();
+    });
+</script>
+{% endblock %}
+
 
