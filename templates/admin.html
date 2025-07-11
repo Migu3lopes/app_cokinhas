@@ -1,72 +1,59 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <title>Administração - Academia</title>
-    <style>
-        #logo-clube {
-            display: block;
-            margin: 20px auto;
-            max-width: 120px;
-            height: auto;
-        }
+{% extends 'base.html' %}
+{% block title %}Administração - Academia{% endblock %}
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
-            margin: 20px;
-        }
+{% block content %}
+<style>
+    #logo-clube {
+        display: block;
+        margin: 20px auto;
+        max-width: 120px;
+        height: auto;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: auto;
-        }
+    .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+    }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
 
-        .botao {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            background-color: #0000FF;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            font-size: 18px;
-            border-radius: 8px;
-            transition: background-color 0.3s;
-        }
+    .botao {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        margin: 10px 0;
+        background-color: #0000FF;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+    }
 
-        .botao:hover {
-            background-color: #0066cc;
-        }
+    .botao:hover {
+        background-color: #0066cc;
+    }
 
-        .voltar {
-            background-color: #888;
-        }
+    .voltar {
+        background-color: #888;
+    }
 
-        .voltar:hover {
-            background-color: #666;
-        }
-    </style>
-</head>
-<body>
+    .voltar:hover {
+        background-color: #666;
+    }
+</style>
+
 <div class="container">
     <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
     <h1>Área de Administração</h1>
 
-    <!-- Botão Gestão de Documentos -->
     <a href="/administracao/documentos" class="botao">📂 Gestão de Documentos</a>
-
-    <!-- Novo Botão Gestão Financeira -->
     <a href="/administracao/financeiro" class="botao">💰 Gestão de Movimentos Financeiros</a>
-
-    <!-- Botão Voltar -->
     <a href="/dashboard" class="botao voltar">🔙 Voltar ao Dashboard</a>
 </div>
-</body>
-</html>
+{% endblock %}
