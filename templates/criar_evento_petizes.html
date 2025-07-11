@@ -1,90 +1,85 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <title>Criar Evento / Jogo</title>
-    <style>
-img.logo {
-    width: 140px;         /* ou outro valor, ex: 120px, 100px */
-    margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-}
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f1f1f1;
-            padding: 30px;
-        }
+{% extends 'base.html' %}
+{% block title %}Criar Evento / Jogo{% endblock %}
 
-        .container {
-            max-width: 600px;
-            margin: auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #aaa;
-        }
+{% block content %}
+<style>
+    .logo {
+        width: 140px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
-        h2 {
-            text-align: center;
-            color: #003366;
-        }
+    .container {
+        max-width: 600px;
+        margin: auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #aaa;
+    }
 
-        label {
-            display: block;
-            margin-top: 15px;
-            font-weight: bold;
-        }
+    h2 {
+        text-align: center;
+        color: #003366;
+    }
 
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
+    label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+    }
 
-        .botoes {
-            margin-top: 25px;
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-        }
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
 
-        .botoes a, .botoes button {
-            flex: 1;
-            padding: 10px;
-            text-align: center;
-            text-decoration: none;
-            color: yellow;
-            background-color: #0000FF;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+    .botoes {
+        margin-top: 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
 
-        .botoes a:hover, .botoes button:hover {
-            background-color: #0066cc;
-        }
+    .botoes a, .botoes button {
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        color: yellow;
+        background-color: #0000FF;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+    }
 
-        .mensagem-sucesso {
-            margin-top: 20px;
-            text-align: center;
-            color: green;
-            font-weight: bold;
-            animation: piscar 1s infinite alternate;
-        }
+    .botoes a:hover, .botoes button:hover {
+        background-color: #0066cc;
+    }
 
-        @keyframes piscar {
-            from { opacity: 1; }
-            to { opacity: 0.4; }
-        }
-    </style>
-</head>
-<body>
+    .mensagem-sucesso {
+        margin-top: 20px;
+        text-align: center;
+        color: green;
+        font-weight: bold;
+        animation: piscar 1s infinite alternate;
+    }
+
+    @keyframes piscar {
+        from { opacity: 1; }
+        to { opacity: 0.4; }
+    }
+</style>
+
 <div class="container">
-<img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" class="logo" style="display: block; margin: 0 auto;">
+    <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" class="logo">
     <h2>Criar Evento / Jogo</h2>
 
     {% if sucesso %}
@@ -95,7 +90,7 @@ img.logo {
         <label for="competicao">Competição *</label>
         <input type="text" id="competicao" name="competicao" required>
         
-<label for="competicao">Jogo*</label>
+        <label for="jogo">Jogo *</label>
         <input type="text" id="jogo" name="jogo" required>
 
         <label for="jornada">Jornada (opcional)</label>
@@ -110,8 +105,8 @@ img.logo {
         <label for="local">Local *</label>
         <input type="text" id="local" name="local" required>
 
-        <label for="local">Hora e Local de concentração *</label>
-        <input type="text" id="local" name="local" required>
+        <label for="concentracao">Hora e Local de concentração *</label>
+        <input type="text" id="concentracao" name="concentracao" required>
 
         <div class="botoes">
             <button type="submit">Criar Jogo</button>
@@ -120,5 +115,4 @@ img.logo {
         </div>
     </form>
 </div>
-</body>
-</html>
+{% endblock %}
