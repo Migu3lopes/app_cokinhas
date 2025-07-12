@@ -1,79 +1,85 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <title>Planeamento - Petizes</title>
-    <style>
-img.logo {
-    width: 140px;         /* ou outro valor, ex: 120px, 100px */
-    margin-bottom: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-}
-        body {
-            font-family: Arial, sans-serif;
-            background-color: white;
-            text-align: center;
-            padding: 40px;
+{% extends 'base.html' %}
+{% block title %}Planeamento - Petizes{% endblock %}
+
+{% block content %}
+<style>
+    .logo {
+        width: 140px;
+        margin: 0 auto 20px auto;
+        display: block;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: #000;
+        margin-bottom: 40px;
+    }
+
+    .botoes-planeamento {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+
+    .botao-planeamento {
+        padding: 15px 25px;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        text-decoration: none;
+        color: yellow;
+        background-color: #0000FF;
+        box-shadow: 0 4px 6px rgba(0, 0, 255, 0.3);
+        transition: background-color 0.3s ease, transform 0.2s;
+        width: 250px;
+        text-align: center;
+    }
+
+    .botao-planeamento:hover {
+        background-color: #0033cc;
+        transform: translateY(-2px);
+    }
+
+    .botao-voltar {
+        display: block;
+        background-color: orange;
+        color: black;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 12px 30px;
+        border-radius: 8px;
+        width: fit-content;
+        margin: 0 auto;
+        box-shadow: 0 4px 6px rgba(255, 165, 0, 0.3);
+    }
+
+    .botao-voltar:hover {
+        background-color: darkorange;
+        transform: scale(1.03);
+    }
+
+    @media screen and (max-width: 600px) {
+        .botao-planeamento {
+            width: 90%;
+            font-size: 16px;
         }
+    }
+</style>
 
-        h1 {
-            color: #000000;
-            margin-bottom: 40px;
-        }
+<img class="logo" src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube">
 
-.botao-planeamento {
-    padding: 12px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    margin: 10px;
-    transition: background-color 0.3s ease;
-}
-        .botao-criar-treino {
-            background-color: #0000FF;
-            color: yellow;
-        }
+<h1>Planeamento da Equipa de Petizes</h1>
 
-        .botao-criar-evento {
-            background-color: #0000FF;
-            color: yellow;
-        }
+<div class="botoes-planeamento">
+    <a href="{{ url_for('criar_treino_petizes') }}" class="botao-planeamento">➕ Criar Treino</a>
+    <a href="{{ url_for('criar_evento_petizes') }}" class="botao-planeamento">🏟️ Criar Jogo</a>
+</div>
 
-
-      .botao-voltar {
-    background-color: orange;
-    color: black;
-    text-align: center;
-    margin-top: 40px;
-    display: block;
-    padding: 12px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 8px;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    text-decoration: none;
-}
-        .botao:hover {
-            opacity: 0.9;
-        }
-    </style>
-</head>
-<body>
-
-        <img class="logo" src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube">
-    <h1>Planeamento da Equipa de Petizes</h1>
-<a href="{{ url_for('criar_treino_petizes') }}" class="botao-planeamento botao-criar-treino">Criar Treino</a>
-<a href="{{ url_for('criar_evento_petizes') }}" class="botao-planeamento botao-criar-evento">Criar Jogo</a>
-
-
-   <a href="{{ url_for('petizes') }}" class="botao-voltar">← Voltar ao Menu da Equipa</a>
-
-</body>
-</html>
+<a href="{{ url_for('petizes') }}" class="botao-voltar">← Voltar ao Menu da Equipa</a>
+{% endblock %}
