@@ -90,29 +90,32 @@
         .acoes-finais {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
+            flex-wrap: wrap;
             margin-top: 30px;
         }
 
         .acoes-finais a {
-            padding: 12px 25px;
+            padding: 12px 30px;
             background-color: #1E90FF;
             color: white;
             text-decoration: none;
             border-radius: 6px;
             font-weight: bold;
+            min-width: 140px;
+            text-align: center;
         }
 
         .acoes-finais a:hover {
             background-color: #0066cc;
         }
 
-        .voltar {
-            background-color: #888 !important;
+        .acoes-finais a.voltar {
+            background-color: #888;
         }
 
-        .voltar:hover {
-            background-color: #666 !important;
+        .acoes-finais a.voltar:hover {
+            background-color: #666;
         }
 
         .btn-apagar {
@@ -184,7 +187,8 @@
     <div class="acoes-finais">
         <a href="/financeiros/despesas" style="background-color: #28a745;">➕ Nova Despesa</a>
         <a href="/despesas/relatorio" style="background-color: #007BFF;" target="_blank">🖨️ Imprimir Relatório</a>
-        <a class="voltar" href="/financeiros/despesas">🔙 Voltar à Gestão de Movimentos Financeiros</a>
+        <a class="voltar" href="/administracao/financeiro">🔙 Voltar</a>
     </div>
+</div>
 </body>
 </html>

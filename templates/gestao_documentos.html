@@ -173,7 +173,7 @@
                 {% set i = loop.index0 %}
                 <td>
                     {% set doc_path = atleta[3 + i] %}
-                    {% if doc_path %}
+                    {% if doc_path and doc_path != '' and doc_path != 'NULL' %}
                         <a href="{{ '/' + doc_path }}" target="_blank">📄</a>
                         <form action="/eliminar_documento" method="POST" style="display:inline;">
                             <input type="hidden" name="atleta_id" value="{{ atleta[0] }}">
@@ -205,4 +205,3 @@
     </div>
 </div>
 {% endblock %}
-
