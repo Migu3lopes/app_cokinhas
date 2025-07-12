@@ -10,42 +10,44 @@
         height: auto;
     }
 
-    body {
-        background-color: #f4f4f4;
-        padding: 20px;
-    }
-
-    h1, h2 {
+    h1 {
         text-align: center;
+        margin-bottom: 30px;
     }
 
     form {
-        margin: 20px auto;
-        max-width: 600px;
         background-color: white;
-        padding: 20px;
-        border-radius: 6px;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 30px;
         box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        border-radius: 10px;
     }
 
     label {
         display: block;
-        margin: 10px 0 5px;
+        margin-top: 20px;
+        font-weight: bold;
     }
 
-    select, input[type="text"], input[type="date"], textarea, button {
+    select, input[type="date"], input[type="text"], textarea {
         width: 100%;
-        padding: 8px;
-        margin-bottom: 15px;
-        border-radius: 4px;
+        padding: 10px;
+        margin-top: 8px;
         border: 1px solid #ccc;
-        font-size: 14px;
+        border-radius: 5px;
     }
 
     button {
+        width: 100%;
+        margin-top: 30px;
+        padding: 12px;
         background-color: #1E90FF;
         color: white;
+        font-size: 16px;
         font-weight: bold;
+        border: none;
+        border-radius: 6px;
         cursor: pointer;
     }
 
@@ -53,19 +55,36 @@
         background-color: #0066cc;
     }
 
-    .voltar, .ver-tabela {
-        display: inline-block;
-        margin: 15px 10px 0;
-        padding: 12px 25px;
-        background-color: #888;
+    .botoes {
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .botoes a {
+        padding: 12px 30px;
+        background-color: #1E90FF;
         color: white;
         text-decoration: none;
         border-radius: 6px;
         font-weight: bold;
+        font-size: 14px;
+        min-width: 140px;
+        text-align: center;
     }
 
-    .voltar:hover, .ver-tabela:hover {
+    .botoes a.voltar {
+        background-color: #888;
+    }
+
+    .botoes a.voltar:hover {
         background-color: #666;
+    }
+
+    .botoes a:hover {
+        background-color: #0066cc;
     }
 </style>
 
@@ -99,7 +118,7 @@
         <label for="item">Item:</label>
         <select name="item" required>
             {% for item in ['Aquisição de material desportivo', 'Equipamentos', 'Aquisição de bens alimentares', 'Pagamento de Torneios', 'Pagamentos Treinadores', 'Exames médicos', 'Pagamento de Seguros', 'Pagamento de combustível', 'Outros pagamentos'] %}
-            <option value="{{ item }}">{{ item }}</option>
+                <option value="{{ item }}">{{ item }}</option>
             {% endfor %}
         </select>
 
@@ -112,10 +131,12 @@
         <label for="comentario">Comentário:</label>
         <textarea name="comentario" placeholder="Comentário..." rows="3"></textarea>
 
-        <button type="submit">Guardar Despesa</button>
+        <button type="submit">💾 Guardar Despesa</button>
     </form>
 
-    <a class="voltar" href="/administracao/financeiro">🔙 Voltar à Gestão de Movimentos Financeiros</a>
-    <a class="ver-tabela" href="/tabela_despesas">📋 Ver Tabela de Despesas</a>
+    <div class="botoes">
+        <a class="voltar" href="/administracao/financeiro">🔙 Voltar</a>
+        <a href="/tabela_despesas">📋 Ver Tabela</a>
+    </div>
 </div>
 {% endblock %}
