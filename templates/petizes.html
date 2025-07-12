@@ -5,12 +5,13 @@
     <title>Equipa de Petizes</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-#logo-clube {
-    display: block;
-    margin: 20px auto;
-    max-width: 120px;
-    height: auto;
-}
+        #logo-clube {
+            display: block;
+            margin: 20px auto;
+            max-width: 120px;
+            height: auto;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
@@ -27,19 +28,32 @@
         h1 {
             font-size: 26px;
             font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
             margin-bottom: 30px;
         }
-      .botao {
-            display: inline-block;
-            margin: 12px;
-            padding: 15px 30px;
-            background-color: #0000FF; /* azul */
-            color: #ffeb3b; /* amarelo */
+
+        .botoes {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .botao {
+            padding: 14px 28px;
+            background-color: #0000FF;
+            color: #ffeb3b;
             text-decoration: none;
-            font-size: 18px;
+            font-size: 16px;
             border-radius: 8px;
             transition: 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
+            min-width: 160px;
         }
 
         .botao:hover {
@@ -49,7 +63,6 @@
 
         .voltar {
             display: inline-block;
-            margin-top: 30px;
             padding: 10px 25px;
             background-color: orange;
             color: black;
@@ -66,17 +79,18 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
+    <div class="container">
+        <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
+
         <h1>Petizes U6/U7</h1>
-        <p>Conteúdo da equipa em desenvolvimento...</p>
-        <a class="botao" href="/petizes/plantel">Plantel</a>
-        <a class="botao" href="{{ url_for('planeamento_petizes') }}" class="btn-planeamento">Planeamento</a>
-        <a class="botao" href="/petizes/assiduidade">Assiduidade</a>
-        <a class="botao" href="{{ url_for('calendario_petizes') }}" class="botao-menu">Agenda</a>
+        <p>Selecione uma das opções abaixo:</p>
 
-
-      
+        <div class="botoes">
+            <a class="botao" href="{{ url_for('plantel_petizes') }}">Plantel</a>
+            <a class="botao" href="{{ url_for('planeamento_petizes') }}">Planeamento</a>
+            <a class="botao" href="{{ url_for('assiduidade_petizes') }}">Assiduidade</a>
+            <a class="botao" href="{{ url_for('calendario_petizes') }}">Agenda</a>
+        </div>
 
         <a class="voltar" href="/equipas">← Voltar</a>
     </div>
