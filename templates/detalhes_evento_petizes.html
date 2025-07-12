@@ -1,63 +1,66 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <title>Detalhes do Evento - Petizes</title>
-    <style>
-#logo-clube {
-    display: block;
-    margin: 20px auto;
-    max-width: 120px;  /* Reduz a largura máxima */
-    height: auto;      /* Mantém a proporção */
-}
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
-            padding: 20px;
-        }
-        .evento {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 600px;
-            margin: auto;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h2 {
-            text-align: center;
-            color: #00008B;
-        }
-        p {
-            margin: 10px 0;
-        }
-        .voltar {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .voltar a {
-            padding: 10px 15px;
-            background-color: #007BFF;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-    </style>
-</head>
-<body>
-<div class="container">
-<img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
-<div class="evento">
-    <h2>Detalhes do Jogo</h2>
-    <p><strong>Competição:</strong> {{ evento[0] }}</p>
-    <p><strong>Jornada:</strong> {{ evento[1] or '—' }}</p>
-    <p><strong>Data:</strong> {{ evento[2] }}</p>
-    <p><strong>Hora:</strong> {{ evento[3] }}</p>
-    <p><strong>Local:</strong> {{ evento[4] }}</p>
-    <p><strong>Hora e Local de Concentração:</strong> {{ evento[5] }}</p>
+{% extends 'base.html' %}
+{% block title %}Detalhes do Evento - Petizes{% endblock %}
 
-    <div class="voltar">
-        <a href="{{ url_for('calendario_petizes') }}">← Voltar ao Calendário</a>
+{% block content %}
+<style>
+    #logo-clube {
+        display: block;
+        margin: 20px auto;
+        max-width: 120px;
+        height: auto;
+    }
+
+    body {
+        background-color: #f8f8f8;
+        padding: 20px;
+    }
+
+    .evento {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        max-width: 600px;
+        margin: auto;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+        text-align: center;
+        color: #00008B;
+    }
+
+    p {
+        margin: 10px 0;
+    }
+
+    .voltar {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .voltar a {
+        padding: 10px 15px;
+        background-color: #007BFF;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+</style>
+
+<div class="container">
+    <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
+    <div class="evento">
+        <h2>Detalhes do Jogo</h2>
+        <p><strong>Competição:</strong> {{ evento[0] }}</p>
+        <p><strong>Jornada:</strong> {{ evento[1] or '—' }}</p>
+        <p><strong>Data:</strong> {{ evento[2] }}</p>
+        <p><strong>Hora:</strong> {{ evento[3] }}</p>
+        <p><strong>Local:</strong> {{ evento[4] }}</p>
+        <p><strong>Hora e Local de Concentração:</strong> {{ evento[5] }}</p>
+
+        <div class="voltar">
+            <a href="{{ url_for('calendario_petizes') }}">← Voltar ao Calendário</a>
+        </div>
     </div>
 </div>
-</body>
-</html>
+{% endblock %}
