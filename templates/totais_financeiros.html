@@ -1,89 +1,80 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <title>Totais Financeiros</title>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f4f4f4;
-            padding: 30px;
-            text-align: center;
-        }
+{% extends 'base.html' %}
+{% block title %}Totais Financeiros{% endblock %}
 
-        #logo-clube {
-            display: block;
-            margin: 20px auto;
-            max-width: 120px;
-        }
+{% block content %}
+<style>
+    #logo-clube {
+        display: block;
+        margin: 20px auto;
+        max-width: 120px;
+    }
 
-        h1 {
-            margin-bottom: 40px;
-        }
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
 
-        .painel {
-            background-color: white;
-            display: inline-block;
-            padding: 40px 60px;
-            border-radius: 12px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            text-align: left;
-            max-width: 400px;
-            margin-top: 30px;
-        }
+    .painel {
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        max-width: 400px;
+        margin: 0 auto 30px auto;
+        font-size: 16px;
+    }
 
-        .linha {
-            font-size: 18px;
-            margin: 15px 0;
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 8px;
-        }
+    .linha {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 5px;
+        font-weight: bold;
+    }
 
-        .linha span:first-child {
-            font-weight: bold;
-        }
+    .saldo {
+        font-size: 18px;
+        color: #28a745;
+        text-align: center;
+        margin-top: 10px;
+    }
 
-        .saldo {
-            font-size: 20px;
-            margin-top: 25px;
-            color: #28a745;
-            font-weight: bold;
-        }
+    .saldo.negativo {
+        color: #dc3545;
+    }
 
-        .saldo.negativo {
-            color: #dc3545;
-        }
+    .botoes {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 30px;
+    }
 
-        .botoes {
-            margin-top: 40px;
-        }
+    .botoes a {
+        padding: 12px 25px;
+        background-color: #1E90FF;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+    }
 
-        .botoes a {
-            padding: 12px 25px;
-            background-color: #1E90FF;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            margin: 10px;
-        }
+    .botoes a:hover {
+        background-color: #0066cc;
+    }
 
-        .botoes a:hover {
-            background-color: #0066cc;
-        }
+    .voltar {
+        background-color: #888 !important;
+    }
 
-        .voltar {
-            background-color: #888 !important;
-        }
-
-        .voltar:hover {
-            background-color: #666 !important;
-        }
-    </style>
-</head>
-<body>
+    .voltar:hover {
+        background-color: #666 !important;
+    }
+</style>
 
 <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
 <h1>Totais Financeiros</h1>
@@ -107,6 +98,4 @@
     <a href="/tabela_despesas">📉 Ver Despesas</a>
     <a href="/administracao/financeiro" class="voltar">🔙 Voltar</a>
 </div>
-
-</body>
-</html>
+{% endblock %}
