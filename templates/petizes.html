@@ -1,98 +1,90 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <title>Equipa de Petizes</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        #logo-clube {
-            display: block;
-            margin: 20px auto;
-            max-width: 120px;
-            height: auto;
-        }
+{% extends 'base.html' %}
+{% block title %}Equipa de Petizes{% endblock %}
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #ffffff;
-            color: #333;
-            text-align: center;
-        }
+{% block content %}
+<style>
+    #logo-clube {
+        display: block;
+        margin: 30px auto 10px auto;
+        max-width: 120px;
+        height: auto;
+    }
 
-        .container {
-            padding: 40px 20px;
-        }
+    .container {
+        padding: 20px;
+        text-align: center;
+    }
 
-        h1 {
-            font-size: 26px;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
+    h1 {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 30px;
+    }
 
-        p {
-            font-size: 16px;
-            margin-bottom: 30px;
-        }
+    .botoes {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 30px;
+    }
 
-        .botoes {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
+    .botao {
+        display: block;
+        width: 250px;
+        padding: 15px;
+        background-color: #0000FF;
+        color: #ffeb3b;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 8px;
+        font-weight: bold;
+        box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
+        transition: background-color 0.3s, transform 0.2s;
+    }
 
+    .botao:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+    }
+
+    .voltar {
+        display: inline-block;
+        background-color: orange;
+        color: black;
+        text-decoration: none;
+        padding: 12px 25px;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: bold;
+        box-shadow: 0 4px 6px rgba(255, 165, 0, 0.3);
+    }
+
+    .voltar:hover {
+        background-color: darkorange;
+        transform: scale(1.03);
+    }
+
+    @media screen and (max-width: 600px) {
         .botao {
-            padding: 14px 28px;
-            background-color: #0000FF;
-            color: #ffeb3b;
-            text-decoration: none;
+            width: 90%;
             font-size: 16px;
-            border-radius: 8px;
-            transition: 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 123, 255, 0.3);
-            min-width: 160px;
         }
+    }
+</style>
 
-        .botao:hover {
-            background-color: #0056b3;
-            transform: translateY(-2px);
-        }
+<div class="container">
+    <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
+    <h1>Petizes U6/U7</h1>
 
-        .voltar {
-            display: inline-block;
-            padding: 10px 25px;
-            background-color: orange;
-            color: black;
-            text-decoration: none;
-            font-size: 16px;
-            border-radius: 6px;
-            box-shadow: 0 4px 6px rgba(255, 165, 0, 0.3);
-        }
-
-        .voltar:hover {
-            background-color: darkorange;
-            transform: scale(1.03);
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
-
-        <h1>Petizes U6/U7</h1>
-        <p>Selecione uma das opções abaixo:</p>
-
-        <div class="botoes">
-            <a class="botao" href="{{ url_for('plantel_petizes') }}">Plantel</a>
-            <a class="botao" href="{{ url_for('planeamento_petizes') }}">Planeamento</a>
-            <a class="botao" href="{{ url_for('assiduidade_petizes') }}">Assiduidade</a>
-            <a class="botao" href="{{ url_for('calendario_petizes') }}">Agenda</a>
-        </div>
-
-        <a class="voltar" href="/equipas">← Voltar</a>
+    <div class="botoes">
+        <a class="botao" href="/petizes/plantel">📋 Plantel</a>
+        <a class="botao" href="{{ url_for('planeamento_petizes') }}">🗓️ Planeamento</a>
+        <a class="botao" href="/petizes/assiduidade">✅ Assiduidade</a>
+        <a class="botao" href="{{ url_for('calendario_petizes') }}">📅 Agenda</a>
     </div>
-</body>
-</html>
+
+    <a class="voltar" href="/equipas">← Voltar</a>
+</div>
+{% endblock %}
+
