@@ -1,99 +1,91 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <title>Inserir Receita</title>
-    <style>
-        #logo-clube {
-            display: block;
-            margin: 20px auto;
-            max-width: 120px;
-            height: auto;
-        }
+{% extends 'base.html' %}
+{% block title %}Gestão de Receitas{% endblock %}
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f4f4f4;
-            padding: 30px;
-        }
+{% block content %}
+<style>
+    #logo-clube {
+        display: block;
+        margin: 20px auto;
+        max-width: 120px;
+        height: auto;
+    }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 40px;
-        }
+    h1 {
+        text-align: center;
+        margin-bottom: 40px;
+    }
 
-        form {
-            background-color: white;
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 30px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 10px;
-        }
+    form {
+        background-color: white;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 30px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        border-radius: 10px;
+    }
 
-        label {
-            display: block;
-            margin-top: 20px;
-            font-weight: bold;
-        }
+    label {
+        display: block;
+        margin-top: 20px;
+        font-weight: bold;
+    }
 
-        select, input[type="date"], input[type="text"], textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+    select, input[type="date"], input[type="text"], textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
 
-        .btn-centro {
-            text-align: center;
-        }
+    .btn-centro {
+        text-align: center;
+    }
 
-        .btn-centro button {
-            margin-top: 30px;
-            padding: 12px 160px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            cursor: pointer;
-            display: inline-block;
-        }
+    .btn-centro button {
+        margin-top: 30px;
+        padding: 12px 160px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        display: inline-block;
+    }
 
-        .btn-centro button:hover {
-            background-color: #218838;
-        }
+    .btn-centro button:hover {
+        background-color: #218838;
+    }
 
-        .botoes {
-            margin-top: 40px;
-            text-align: center;
-        }
+    .botoes {
+        margin-top: 40px;
+        text-align: center;
+    }
 
-        .botoes a {
-            margin: 10px;
-            padding: 12px 25px;
-            background-color: #1E90FF;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-        }
+    .botoes a {
+        margin: 10px;
+        padding: 12px 25px;
+        background-color: #1E90FF;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+    }
 
-        .botoes a.voltar {
-            background-color: #888;
-        }
+    .botoes a.voltar {
+        background-color: #888;
+    }
 
-        .botoes a.voltar:hover {
-            background-color: #666;
-        }
+    .botoes a.voltar:hover {
+        background-color: #666;
+    }
 
-        .botoes a:hover {
-            background-color: #0066cc;
-        }
-    </style>
-</head>
-<body>
+    .botoes a:hover {
+        background-color: #0066cc;
+    }
+</style>
+
 <div class="container">
     <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
     <h1>Gestão de Receitas</h1>
@@ -136,6 +128,4 @@
         }
     });
 </script>
-
-</body>
-</html>
+{% endblock %}
