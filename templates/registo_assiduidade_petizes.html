@@ -3,22 +3,16 @@
 
 {% block content %}
 <style>
-    img.logo {
-        width: 140px;
-        margin-bottom: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    }
-
-    body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #ffffff;
-        padding: 30px;
+    .logo {
+        width: 120px;
+        margin: 0 auto 20px;
+        display: block;
     }
 
     h1 {
         text-align: center;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
+        font-size: 24px;
     }
 
     .mensagem {
@@ -46,7 +40,7 @@
     }
 
     form {
-        max-width: 1000px;
+        max-width: 900px;
         margin: 0 auto;
         background: #f9f9f9;
         padding: 20px;
@@ -54,16 +48,32 @@
         box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
+    label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="date"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        font-size: 16px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+
     table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 20px;
+        margin-top: 15px;
     }
 
     th, td {
-        padding: 10px;
+        padding: 8px;
         text-align: center;
         border-bottom: 1px solid #ccc;
+        font-size: 14px;
     }
 
     th:first-child, td:first-child {
@@ -71,12 +81,14 @@
     }
 
     .botao-opcao {
-        padding: 10px 12px;
+        padding: 6px 10px;
         border: none;
-        border-radius: 6px;
+        border-radius: 5px;
         cursor: pointer;
         font-weight: bold;
-        width: 100%;
+        font-size: 12px;
+        width: 36px;
+        height: 36px;
         background-color: #ccc;
         color: white;
     }
@@ -87,25 +99,37 @@
 
     #registarBtn {
         display: none;
-        margin-top: 20px;
+        margin: 20px auto 10px;
         background-color: #007bff;
         color: white;
-        padding: 12px 24px;
+        padding: 12px 40px;
         border: none;
         border-radius: 6px;
+        font-size: 16px;
         cursor: pointer;
+        display: block;
     }
 
     #registarBtn:hover {
         background-color: #0056b3;
     }
 
-    .voltar, .ver-historico, .ver-calendario {
-        display: inline-block;
-        margin-top: 20px;
-        padding: 10px 20px;
-        text-decoration: none;
+    .botoes-rodape {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 25px;
+    }
+
+    .botoes-rodape a {
+        padding: 12px 24px;
         border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 14px;
+        min-width: 160px;
+        text-align: center;
     }
 
     .voltar {
@@ -116,7 +140,6 @@
     .ver-historico, .ver-calendario {
         background-color: #0000FF;
         color: yellow;
-        margin-left: 10px;
     }
 
     .voltar:hover {
@@ -126,9 +149,32 @@
     .ver-historico:hover, .ver-calendario:hover {
         background-color: #0066cc;
     }
+
+    @media screen and (max-width: 600px) {
+        .botao-opcao {
+            width: 30px;
+            height: 30px;
+            font-size: 11px;
+        }
+
+        table th, table td {
+            font-size: 12px;
+        }
+
+        .botoes-rodape a {
+            font-size: 13px;
+            padding: 10px 20px;
+            min-width: 140px;
+        }
+
+        #registarBtn {
+            font-size: 14px;
+            padding: 10px 30px;
+        }
+    }
 </style>
 
-<div style="text-align: center;">
+<div>
     <img class="logo" src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube">
     <h1>Registo de Assiduidade - Petizes</h1>
 
@@ -141,29 +187,35 @@
         <input type="date" name="data" id="data" required>
 
         <table>
-            <tr>
-                <th>Nome do Jogador</th>
-                <th>Presente</th>
-                <th>Falta Justificada</th>
-                <th>Falta Injustificada</th>
-            </tr>
-            {% for jogador in jogadores %}
-            <tr>
-                <td>{{ jogador[1] }}</td>
-                <input type="hidden" name="estado_{{ jogador[0] }}" id="estado_{{ jogador[0] }}">
-                <td><button type="button" class="botao-opcao presente" onclick="selecionarOpcao('{{ jogador[0] }}', 'Presente', this)">✔</button></td>
-                <td><button type="button" class="botao-opcao justificada" onclick="selecionarOpcao('{{ jogador[0] }}', 'Falta Justificada', this)">✔</button></td>
-                <td><button type="button" class="botao-opcao injustificada" onclick="selecionarOpcao('{{ jogador[0] }}', 'Falta Injustificada', this)">✔</button></td>
-            </tr>
-            {% endfor %}
+            <thead>
+                <tr>
+                    <th>Nome do Jogador</th>
+                    <th>Presente</th>
+                    <th>Falta Justificada</th>
+                    <th>Falta Injustificada</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for jogador in jogadores %}
+                <tr>
+                    <td>{{ jogador[1] }}</td>
+                    <input type="hidden" name="estado_{{ jogador[0] }}" id="estado_{{ jogador[0] }}">
+                    <td><button type="button" class="botao-opcao presente" onclick="selecionarOpcao('{{ jogador[0] }}', 'Presente', this)">✔</button></td>
+                    <td><button type="button" class="botao-opcao justificada" onclick="selecionarOpcao('{{ jogador[0] }}', 'Falta Justificada', this)">✔</button></td>
+                    <td><button type="button" class="botao-opcao injustificada" onclick="selecionarOpcao('{{ jogador[0] }}', 'Falta Injustificada', this)">✔</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
 
         <button type="submit" id="registarBtn">Registar Assiduidade</button>
     </form>
 
-    <a href="/petizes" class="voltar">&#8592; Voltar ao Menu da Equipa</a>
-    <a href="/petizes/historico" class="ver-historico">📊 Ver Histórico</a>
-    <a href="/petizes/calendario" class="ver-calendario">📅 Ver Calendário</a>
+    <div class="botoes-rodape">
+        <a href="/petizes" class="voltar">← Voltar ao Menu da Equipa</a>
+        <a href="/petizes/historico" class="ver-historico">📊 Ver Histórico</a>
+        <a href="/petizes/calendario" class="ver-calendario">📅 Ver Calendário</a>
+    </div>
 </div>
 
 <script>
@@ -184,11 +236,7 @@
         const todosPreenchidos = Array.from(estados).every(input => input.value !== "");
 
         const botao = document.getElementById('registarBtn');
-        if (dataSelecionada && todosPreenchidos) {
-            botao.style.display = 'inline-block';
-        } else {
-            botao.style.display = 'none';
-        }
+        botao.style.display = (dataSelecionada && todosPreenchidos) ? 'block' : 'none';
     }
 
     document.getElementById('data').addEventListener('change', verificarPreenchimento);
