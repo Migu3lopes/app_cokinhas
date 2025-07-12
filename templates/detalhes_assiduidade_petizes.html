@@ -1,71 +1,69 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <title>Assiduidade em {{ data }}</title>
-    <style>
-#logo-clube {
-    display: block;
-    margin: 20px auto;
-    max-width: 120px;  /* Reduz a largura máxima */
-    height: auto;      /* Mantém a proporção */
-}
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            padding: 20px;
-        }
+{% extends 'base.html' %}
+{% block title %}Assiduidade em {{ data }}{% endblock %}
 
-        h2 {
-            text-align: center;
-        }
+{% block content %}
+<style>
+    #logo-clube {
+        display: block;
+        margin: 20px auto;
+        max-width: 120px;
+        height: auto;
+    }
 
-        table {
-            width: 80%;
-            margin: 0 auto;
-            border-collapse: collapse;
-            background-color: white;
-        }
+    body {
+        background-color: #f4f4f4;
+        padding: 20px;
+    }
 
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: left;
-        }
+    h2 {
+        text-align: center;
+    }
 
-        th {
-            background-color: #0000FF;
-            color: yellow;
-        }
+    table {
+        width: 80%;
+        margin: 0 auto;
+        border-collapse: collapse;
+        background-color: white;
+    }
 
-        .presente {
-            background-color: #00FF00;
-        }
+    th, td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+    }
 
-        .justificada {
-            background-color: #fff6b3;
-        }
+    th {
+        background-color: #0000FF;
+        color: yellow;
+    }
 
-        .injustificada {
-            background-color: #FF0000;
-        }
+    .presente {
+        background-color: #00FF00;
+    }
 
-        .btn-voltar {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            background-color: orange;
-            color: black;
-            text-align: center;
-            text-decoration: none;
-            width: fit-content;
-            border-radius: 5px;
-        }
-    </style>
-</head>
-<body>
+    .justificada {
+        background-color: #fff6b3;
+    }
+
+    .injustificada {
+        background-color: #FF0000;
+    }
+
+    .btn-voltar {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: orange;
+        color: black;
+        text-align: center;
+        text-decoration: none;
+        width: fit-content;
+        border-radius: 5px;
+    }
+</style>
+
 <div class="container">
-<img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
+    <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
     <h2>Assiduidade em {{ data }}</h2>
 
     <table>
@@ -82,6 +80,5 @@
     </table>
 
     <a href="{{ url_for('calendario_petizes') }}" class="btn-voltar">← Voltar ao Calendário</a>
-
-</body>
-</html>
+</div>
+{% endblock %}
