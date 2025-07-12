@@ -1,89 +1,96 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <title>Gestão de Despesas</title>
-    <style>
-#logo-clube {
-    display: block;
-    margin: 20px auto;
-    max-width: 120px;
-    height: auto;
-}
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f4f4f4;
-            padding: 20px;
-        }
-        h1, h2 {
-            text-align: center;
-        }
-        form {
-            margin: 20px auto;
-            max-width: 600px;
-            background-color: white;
-            padding: 20px;
-            border-radius: 6px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        label {
-            display: block;
-            margin: 10px 0 5px;
-        }
-        select, input[type="text"], input[type="date"], textarea, button {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            font-size: 14px;
-        }
-        button {
-            background-color: #1E90FF;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0066cc;
-        }
-        .voltar, .ver-tabela {
-            display: inline-block;
-            margin: 15px 10px 0;
-            padding: 12px 25px;
-            background-color: #888;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-        }
-        .voltar:hover, .ver-tabela:hover {
-            background-color: #666;
-        }
-    </style>
-    <script>
-        function formatarParaEuro(input) {
-            let valor = parseFloat(input.value.replace(",", "."));
-            if (!isNaN(valor)) {
-                input.value = "€" + valor.toFixed(2);
-            }
-        }
+{% extends 'base.html' %}
+{% block title %}Gestão de Despesas{% endblock %}
 
-        function validarFormulario(event) {
-            const campo = document.querySelector('input[name="valor"]');
-            let valor = campo.value.replace("€", "").replace(",", ".");
-            if (isNaN(parseFloat(valor))) {
-                alert("Por favor, insira um valor numérico válido.");
-                event.preventDefault();
-            }
-        }
+{% block content %}
+<style>
+    #logo-clube {
+        display: block;
+        margin: 20px auto;
+        max-width: 120px;
+        height: auto;
+    }
 
-        window.addEventListener("DOMContentLoaded", () => {
-            document.querySelector("form").addEventListener("submit", validarFormulario);
-        });
-    </script>
-</head>
-<body>
+    body {
+        background-color: #f4f4f4;
+        padding: 20px;
+    }
+
+    h1, h2 {
+        text-align: center;
+    }
+
+    form {
+        margin: 20px auto;
+        max-width: 600px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 6px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+        display: block;
+        margin: 10px 0 5px;
+    }
+
+    select, input[type="text"], input[type="date"], textarea, button {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+
+    button {
+        background-color: #1E90FF;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0066cc;
+    }
+
+    .voltar, .ver-tabela {
+        display: inline-block;
+        margin: 15px 10px 0;
+        padding: 12px 25px;
+        background-color: #888;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+    }
+
+    .voltar:hover, .ver-tabela:hover {
+        background-color: #666;
+    }
+</style>
+
+<script>
+    function formatarParaEuro(input) {
+        let valor = parseFloat(input.value.replace(",", "."));
+        if (!isNaN(valor)) {
+            input.value = "€" + valor.toFixed(2);
+        }
+    }
+
+    function validarFormulario(event) {
+        const campo = document.querySelector('input[name="valor"]');
+        let valor = campo.value.replace("€", "").replace(",", ".");
+        if (isNaN(parseFloat(valor))) {
+            alert("Por favor, insira um valor numérico válido.");
+            event.preventDefault();
+        }
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+        document.querySelector("form").addEventListener("submit", validarFormulario);
+    });
+</script>
+
 <div class="container">
     <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
     <h1>Gestão de Despesas</h1>
@@ -110,6 +117,5 @@
 
     <a class="voltar" href="/administracao/financeiro">🔙 Voltar à Gestão de Movimentos Financeiros</a>
     <a class="ver-tabela" href="/tabela_despesas">📋 Ver Tabela de Despesas</a>
-</body>
-</html>
-
+</div>
+{% endblock %}
