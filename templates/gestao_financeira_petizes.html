@@ -64,34 +64,46 @@
     .acoes-finais {
         margin-top: 30px;
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .btn-voltar,
+    .btn-mapa {
+        width: 220px;
+        padding: 12px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        display: block;
+        text-align: center;
     }
 
     .btn-voltar {
         background-color: orange;
         color: black;
-        padding: 10px 20px;
-        border-radius: 5px;
-        text-decoration: none;
-        font-weight: bold;
-        margin-right: 20px;
     }
 
     .btn-mapa {
         background-color: blue;
         color: yellow;
-        padding: 10px 20px;
-        border-radius: 5px;
-        text-decoration: none;
-        font-weight: bold;
     }
 
     @media screen and (max-width: 600px) {
         td:first-child {
             font-size: 14px;
         }
+
         .btn-pagamento {
             font-size: 14px;
             padding: 6px 12px;
+        }
+
+        .btn-voltar,
+        .btn-mapa {
+            width: 90%;
         }
     }
 </style>
@@ -118,8 +130,8 @@
     </div>
 
     <div class="acoes-finais">
+        <a href="{{ url_for('mapa_pagamento_petizes') }}" class="btn-mapa">📊 Mapa de Pagamentos</a>
         <a href="{{ url_for('plantel_petizes') }}" class="btn-voltar">← Voltar ao Plantel</a>
-        <a href="{{ url_for('mapa_pagamento_petizes') }}" class="btn-mapa">Mapa de Pagamentos</a>
     </div>
 </div>
 {% endblock %}
