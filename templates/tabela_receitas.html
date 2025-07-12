@@ -1,125 +1,141 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <title>Tabela de Receitas</title>
-    <style>
-        #logo-clube {
-            display: block;
-            margin: 20px auto;
-            max-width: 120px;
-            height: auto;
-        }
+{% extends 'base.html' %}
+{% block title %}Tabela de Receitas{% endblock %}
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f4f4f4;
-            padding: 20px;
-        }
+{% block content %}
+<style>
+    #logo-clube {
+        display: block;
+        margin: 20px auto;
+        max-width: 120px;
+        height: auto;
+    }
 
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 22px;
+    }
+
+    form.filtros {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+
+    form.filtros select,
+    form.filtros button {
+        padding: 6px 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+
+    .btn-pesquisar {
+        background-color: #007BFF;
+        color: white;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-pesquisar:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-limpar {
+        background-color: #dc3545;
+        color: white;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-limpar:hover {
+        background-color: #bd2130;
+    }
+
+    .tabela-container {
+        overflow-x: auto;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        background-color: white;
+        font-size: 13px;
+        min-width: 600px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 6px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #28a745;
+        color: white;
+        font-size: 13px;
+    }
+
+    .total {
+        text-align: right;
+        margin-top: 20px;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .acoes-finais {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 30px;
+        flex-wrap: wrap;
+    }
+
+    .acoes-finais a {
+        padding: 10px 20px;
+        background-color: #1E90FF;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .acoes-finais a:hover {
+        background-color: #0066cc;
+    }
+
+    .voltar {
+        background-color: #888 !important;
+    }
+
+    .voltar:hover {
+        background-color: #666 !important;
+    }
+
+    @media screen and (max-width: 768px) {
         h1 {
-            text-align: center;
-            margin-bottom: 30px;
+            font-size: 20px;
         }
-
-        form.filtros {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        form.filtros select,
-        form.filtros input[type="text"],
-        form.filtros button {
-            padding: 8px 12px;
-            font-size: 14px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-        }
-
-        .btn-pesquisar {
-            background-color: #007BFF;
-            color: white;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-pesquisar:hover {
-            background-color: #0056b3;
-        }
-
-        .btn-limpar {
-            background-color: #dc3545;
-            color: white;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-limpar:hover {
-            background-color: #bd2130;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 6px;
-            text-align: center;
-        }
-
-        th {
-            background-color: #28a745;
-            color: white;
-        }
-
         .total {
-            text-align: right;
-            margin-top: 20px;
-            font-weight: bold;
+            font-size: 13px;
         }
+    }
+</style>
 
-        .acoes-finais {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .acoes-finais a {
-            padding: 12px 25px;
-            background-color: #1E90FF;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-        }
-
-        .acoes-finais a:hover {
-            background-color: #0066cc;
-        }
-
-        .voltar {
-            background-color: #888 !important;
-        }
-
-        .voltar:hover {
-            background-color: #666 !important;
-        }
-    </style>
-</head>
-<body>
 <div class="container">
     <img src="{{ url_for('static', filename='img/assiduidade.png') }}" alt="Logo do Clube" id="logo-clube">
-
     <h1>Tabela de Receitas</h1>
 
     <form class="filtros" method="GET">
@@ -131,48 +147,47 @@
         </select>
 
         <button type="submit" class="btn-pesquisar">🔎 Pesquisar</button>
-        <button type="button" class="btn-limpar" onclick="window.location.href='/tabela_receitas'">❌ Limpar Filtros</button>
+        <button type="button" class="btn-limpar" onclick="window.location.href='/tabela_receitas'">❌ Limpar</button>
     </form>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Origem</th>
-                <th>Valor</th>
-                <th>Comentário</th>
-                <th>Mês</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for receita in receitas %}
-            <tr>
-                <td>{{ receita.origem }}</td>
-                <td>€{{ '%.2f' % receita.valor }}</td>
-                <td>{{ receita.comentario }}</td>
-                <td>
-                    {% if receita.mes and receita.mes != '-' %}
-                        {% set meses_pt = {
-                            '01':'Janeiro','02':'Fevereiro','03':'Março','04':'Abril','05':'Maio','06':'Junho',
-                            '07':'Julho','08':'Agosto','09':'Setembro','10':'Outubro','11':'Novembro','12':'Dezembro'
-                        } %}
-                        {{ meses_pt.get(receita.mes.zfill(2), receita.mes) }}
-                    {% else %}
-                        -
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <div class="total">
-        Total Geral: €{{ '%.2f' % total_geral }}
+    <div class="tabela-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Origem</th>
+                    <th>Valor</th>
+                    <th>Comentário</th>
+                    <th>Mês</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for receita in receitas %}
+                <tr>
+                    <td>{{ receita.origem }}</td>
+                    <td>€{{ '%.2f' % receita.valor }}</td>
+                    <td>{{ receita.comentario }}</td>
+                    <td>
+                        {% if receita.mes and receita.mes != '-' %}
+                            {% set meses_pt = {
+                                '01':'Janeiro','02':'Fevereiro','03':'Março','04':'Abril','05':'Maio','06':'Junho',
+                                '07':'Julho','08':'Agosto','09':'Setembro','10':'Outubro','11':'Novembro','12':'Dezembro'
+                            } %}
+                            {{ meses_pt.get(receita.mes.zfill(2), receita.mes) }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
+
+    <div class="total">Total Geral: €{{ '%.2f' % total_geral }}</div>
 
     <div class="acoes-finais">
         <a href="/receitas" style="background-color: #28a745;">➕ Nova Receita</a>
-        <a class="voltar" href="/administracao/financeiro">🔙 Voltar à Gestão de Movimentos Financeiros</a>
+        <a class="voltar" href="/administracao/financeiro">🔙 Voltar</a>
     </div>
 </div>
-</body>
-</html>
+{% endblock %}
